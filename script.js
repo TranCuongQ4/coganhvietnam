@@ -265,7 +265,7 @@ function updateTurnPanel() {
 // THÔNG BÁO KẾT THÚC TRẬN ĐẤU
 // =========================================================
 
-function showGameOverNotification(status) {
+function showGameOverNotification(status, winnerPiece = null) {
     const oldNotify = document.getElementById('custom-gameover-notify');
     if (oldNotify) oldNotify.remove();
     if (resetCountdownTimer) clearInterval(resetCountdownTimer);
@@ -294,7 +294,16 @@ function showGameOverNotification(status) {
 
     if (status === 'win') {
         countdownTime = 10;
-        messageText = `Chúc Mừng Bạn Đã Chiến Thắng ${(gameMode === 'bot') ? 'Bot' : 'Đối Phương'}`;
+        if (gameMode === 'bot') {
+            messageText = `Chúc Mừng Bạn Đã Chiến Thắng Bot`;
+        } else {
+            // Chế độ người với người: ghi rõ bên thắng
+            if (winnerPiece === 'L') {
+                messageText = `Chúc Mừng Quân Xanh Lá Đã Chiến Thắng!`;
+            } else {
+                messageText = `Chúc Mừng Quân Xanh Dương Đã Chiến Thắng!`;
+            }
+        }
         Object.assign(notifyBox.style, { backgroundColor: '#c0392b', border: '4px solid #f1c40f', color: '#ffffff' });
     } else {
         countdownTime = 5;
@@ -348,14 +357,20 @@ function checkGameOver() {
         if (gameMode === 'bot') {
             showGameOverNotification('lose');
         } else {
-            alert("QUÂN XANH DƯƠNG CHIẾN THẮNG!");
-            resetGame();
+            // Chế độ người với người: thông báo bên thắng là D
+            showGameOverNotification('win', 'D');
         }
         return true;
     }
 
     if (countD === 0) {
-        showGameOverNotification('win');
+        // Trong chế độ người với người: winnerPiece là L
+        // Trong chế độ bot: vẫn hiển thị thông báo win (không cần truyền winnerPiece vì dùng bot message)
+        if (gameMode === 'player') {
+            showGameOverNotification('win', 'L');
+        } else {
+            showGameOverNotification('win');
+        }
         return true;
     }
     return false;
