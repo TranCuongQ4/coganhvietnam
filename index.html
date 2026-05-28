@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Cờ Gánh Việt Nam</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>CỜ GÁNH VIỆT NAM</h1>
+        
+        <div class="status-panel">
+            <div id="turn-indicator" class="turn-box xanh-la">Lượt Của: Quân Xanh Lá</div>
+            <div class="button-group">
+                <button id="btn-mode">Chế Độ Chơi</button>
+                <button id="btn-guide">Xem Hướng Dẫn</button>
+            </div>
+        </div>
+
+        <div class="board-wrapper">
+            <img src="coganh.png" alt="Bàn cờ Gánh" class="board-bg">
+            <div id="board-grid" class="board-grid"></div>
+        </div>
+
+        <div class="audio-control-container">
+            <button id="btn-audio-toggle" class="btn-3d btn-audio">
+                <span id="audio-icon">🔊</span> Nhạc Nền
+            </button>
+        </div>
+
+        <div class="game-footer">Thiết Kế Trần Cường - Zalo: 0907860662</div>
+    </div>
+
+    <audio id="bg-music" src="covay.mp3" loop prefetch></audio>
+
+    <div id="guide-modal" class="modal hidden">
+        <div class="modal-content">
+            <div id="guide-text"></div>
+        </div>
+    </div>
+
+    <div id="mode-modal" class="modal hidden">
+        <div class="modal-content mode-content">
+            <h2>CHỌN CHẾ ĐỘ CHƠI</h2>
+            <div class="mode-buttons">
+                <button id="btn-vs-player" class="btn-select btn-3d">VS Người</button>
+                <button id="btn-vs-bot" class="btn-select btn-3d">VS Bot</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="huongdan.js"></script>
+    <script src="luatco.js"></script>
+    <script src="botgame.js"></script>
+    <script src="script.js"></script>
+    <script src="chinuoc.js"></script>
+</body>
+</html>

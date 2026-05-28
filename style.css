@@ -1,0 +1,712 @@
+/* =========================================================
+   1. RESET & DARK MODE
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+
+    -webkit-touch-callout: none !important;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    overflow: hidden;
+}
+
+/* =========================================================
+   2. KHUNG GAME
+   ========================================================= */
+.game-container {
+    text-align: center;
+
+    background: #1e1e1e;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* =========================================================
+   3. TIÊU ĐỀ
+   ========================================================= */
+h1 {
+    color: #ffffff;
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   4. STATUS PANEL
+   ========================================================= */
+.status-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+}
+
+#turn-indicator {
+    padding: 10px 20px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    color: white;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        0 2px 4px rgba(0,0,0,0.3);
+}
+
+.xanh-la {
+    background-color: #2ecc71;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.xanh-duong {
+    background-color: #3498db;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* =========================================================
+   5. BUTTON 3D
+   ========================================================= */
+.btn-3d {
+    position: relative;
+
+    display: inline-block;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: white;
+
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+
+    transition: all 0.1s ease;
+}
+
+.btn-3d:active {
+    transform: translateY(4px) !important;
+}
+
+#btn-guide {
+    padding: 10px 18px;
+
+    background: linear-gradient(to bottom, #f39c12, #e67e22);
+
+    box-shadow:
+        0 5px 0 #b35d10,
+        0 8px 10px rgba(0,0,0,0.4);
+}
+
+#btn-guide:hover {
+    background: linear-gradient(to bottom, #e67e22, #d35400);
+}
+
+#btn-guide:active {
+    box-shadow:
+        0 1px 0 #b35d10,
+        0 2px 5px rgba(0,0,0,0.4);
+}
+
+#btn-mode {
+    padding: 10px 18px;
+
+    background: linear-gradient(to bottom, #1abc9c, #16a085);
+
+    box-shadow:
+        0 5px 0 #117a65,
+        0 8px 10px rgba(0,0,0,0.4);
+}
+
+#btn-mode:hover {
+    background: linear-gradient(to bottom, #16a085, #117a65);
+}
+
+#btn-mode:active {
+    box-shadow:
+        0 1px 0 #117a65,
+        0 2px 5px rgba(0,0,0,0.4);
+}
+
+/* =========================================================
+   6. AUDIO
+   ========================================================= */
+.audio-control-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-audio {
+    padding: 10px 22px;
+
+    font-size: 14px;
+
+    background: linear-gradient(to bottom, #34495e, #2c3e50);
+
+    box-shadow:
+        0 5px 0 #1a252f,
+        0 8px 10px rgba(0,0,0,0.4);
+}
+
+.btn-audio:hover {
+    background: linear-gradient(to bottom, #2c3e50, #1a252f);
+}
+
+.btn-audio:active {
+    box-shadow:
+        0 1px 0 #1a252f,
+        0 2px 5px rgba(0,0,0,0.4);
+}
+
+.btn-audio.muted {
+    background: linear-gradient(to bottom, #7f8c8d, #95a5a6);
+
+    box-shadow:
+        0 5px 0 #5f696a,
+        0 8px 10px rgba(0,0,0,0.4);
+}
+
+.btn-audio.muted:active {
+    box-shadow:
+        0 1px 0 #5f696a,
+        0 2px 5px rgba(0,0,0,0.4);
+}
+
+/* =========================================================
+   7. BÀN CỜ
+   ========================================================= */
+.board-wrapper {
+    position: relative;
+
+    background: #2c2c2c;
+
+    border-radius: 8px;
+
+    border: 3px solid rgba(255, 255, 255, 0.8);
+
+    animation: borderGlowBlink 2s infinite ease-in-out;
+}
+
+@keyframes borderGlowBlink {
+
+    0% {
+        border-color: rgba(255, 255, 255, 0.3);
+
+        box-shadow:
+            inset 0 0 15px rgba(0, 0, 0, 0.6),
+            0 0 4px rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        border-color: rgba(255, 255, 255, 1);
+
+        box-shadow:
+            inset 0 0 15px rgba(0, 0, 0, 0.4),
+            0 0 20px rgba(255, 255, 255, 0.8);
+    }
+
+    100% {
+        border-color: rgba(255, 255, 255, 0.3);
+
+        box-shadow:
+            inset 0 0 15px rgba(0, 0, 0, 0.6),
+            0 0 4px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.board-bg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    filter: invert(0.85) brightness(0.6) contrast(1.2);
+}
+
+.board-grid {
+    position: absolute;
+
+    top: 0%;
+    left: 0%;
+
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.point {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.piece {
+    width: 76%;
+    height: 76%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transition: transform 0.2s ease, filter 0.2s ease;
+
+    z-index: 2;
+
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+.piece.L {
+    background-image: url('quanxanhla.png');
+}
+
+.piece.D {
+    background-image: url('quanxanhduong.png');
+}
+
+.piece.selected {
+    transform: scale(1.15);
+
+    filter:
+        brightness(1.3)
+        drop-shadow(0 0 12px rgba(241, 196, 15, 0.8));
+}
+
+.point.movable::after {
+    content: '';
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    background: rgba(241, 196, 15, 0.85);
+
+    border-radius: 50%;
+
+    z-index: 1;
+
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.6);
+
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+}
+
+/* =========================================================
+   8. FOOTER
+   ========================================================= */
+.game-footer {
+    font-weight: bold;
+
+    color: #f1c40f;
+
+    letter-spacing: 0.5px;
+
+    opacity: 0.85;
+
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   9. MODAL
+   ========================================================= */
+.modal {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 999;
+}
+
+.modal.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    background: #242424;
+
+    color: #e0e0e0;
+
+    border-radius: 12px;
+
+    position: relative;
+
+    line-height: 1.6;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+    border: 1px solid #3d3d3d;
+}
+
+.mode-content {
+    background: rgba(22, 160, 133, 0.95) !important;
+
+    border: 3px solid #ffffff !important;
+
+    color: white !important;
+
+    text-align: center !important;
+
+    border-radius: 16px !important;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.mode-content h2 {
+    color: #ffffff !important;
+
+    letter-spacing: 1px;
+
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-select {
+    color: #16a085 !important;
+
+    background: white;
+}
+
+.modal-content h3 {
+    color: #ff9f43;
+}
+
+/* =========================================================
+   10. PC
+   ========================================================= */
+@media screen and (min-width: 769px) {
+
+    .game-container {
+        width: 520px;
+
+        max-height: 96vh;
+
+        padding: 12px 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+
+        margin-bottom: 10px;
+    }
+
+    .status-panel {
+        width: 100%;
+
+        margin-bottom: 10px;
+    }
+
+    .board-wrapper {
+        width: 430px;
+        height: 430px;
+    }
+
+    .audio-control-container {
+        margin-top: 12px;
+        margin-bottom: 2px;
+    }
+
+    .btn-audio {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .game-footer {
+        font-size: 11px;
+
+        margin-top: 8px;
+    }
+
+    .modal-content {
+        max-width: 450px;
+
+        width: 90%;
+
+        padding: 25px;
+    }
+
+    .mode-content {
+        width: 320px !important;
+
+        max-width: 90% !important;
+
+        padding: 25px !important;
+    }
+
+    .mode-content h2 {
+        font-size: 22px;
+
+        margin-bottom: 20px;
+    }
+}
+
+/* =========================================================
+   11. MOBILE AUTO FIT
+   ========================================================= */
+@media screen and (max-width: 768px) {
+
+    body {
+        background-color: #0a0a0a;
+    }
+
+    .game-container {
+
+        width: 100vw !important;
+        height: 100dvh !important;
+
+        max-width: 100vw !important;
+        max-height: 100dvh !important;
+
+        padding: 8px 8px 4px 8px !important;
+
+        border-radius: 0px;
+
+        overflow: hidden;
+
+        background: #141414;
+    }
+
+    h1 {
+        font-size: 20px !important;
+
+        margin-bottom: 0px !important;
+
+        width: 100%;
+
+        height: 28px;
+
+        line-height: 28px;
+    }
+
+    .status-panel {
+
+        width: 100%;
+
+        gap: 8px;
+
+        margin-bottom: 0px !important;
+
+        height: 38px;
+    }
+
+    .button-group {
+        gap: 6px;
+    }
+
+    #turn-indicator {
+        font-size: 12px !important;
+
+        padding: 7px 10px !important;
+
+        white-space: nowrap;
+    }
+
+    #btn-guide,
+    #btn-mode {
+
+        padding: 7px 10px !important;
+
+        font-size: 12px !important;
+    }
+
+    .board-wrapper {
+
+        width: 88vw !important;
+        height: 88vw !important;
+
+        max-width: 345px !important;
+        max-height: 345px !important;
+
+        margin: 2px auto !important;
+    }
+
+    .audio-control-container {
+
+        margin-top: 2px !important;
+
+        margin-bottom: 0px !important;
+
+        height: 34px;
+    }
+
+    .btn-audio {
+
+        padding: 7px 18px !important;
+
+        font-size: 12px !important;
+    }
+
+    .game-footer {
+
+        font-size: 10px !important;
+
+        margin-top: 0px !important;
+
+        margin-bottom: 2px !important;
+    }
+
+    .modal {
+        position: absolute !important;
+    }
+
+    .modal-content {
+
+        width: 88% !important;
+
+        padding: 20px !important;
+    }
+
+    .mode-content {
+
+        width: 300px !important;
+
+        padding: 22px !important;
+    }
+
+    .mode-content h2 {
+
+        font-size: 20px !important;
+
+        margin-bottom: 16px !important;
+    }
+
+    #custom-gameover-notify {
+
+        position: absolute !important;
+
+        width: 290px !important;
+
+        background: #c0392b !important;
+
+        border: 4px solid #f1c40f !important;
+
+        border-radius: 16px !important;
+
+        box-shadow: 0 8px 25px rgba(0,0,0,0.7) !important;
+
+        padding: 22px 15px !important;
+
+        top: 50% !important;
+        left: 50% !important;
+
+        transform: translate(-50%, -50%) !important;
+
+        color: white !important;
+    }
+
+    #custom-gameover-notify h1 {
+
+        color: #f1c40f !important;
+
+        font-size: 24px !important;
+
+        font-weight: 900 !important;
+
+        margin-bottom: 10px !important;
+
+        height: auto !important;
+
+        line-height: normal !important;
+
+        white-space: normal !important;
+    }
+
+    #custom-gameover-notify p {
+
+        font-size: 15px !important;
+
+        line-height: 1.5 !important;
+
+        font-weight: bold !important;
+    }
+}
