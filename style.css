@@ -77,32 +77,49 @@ h1 {
 .button-group {
     display: flex;
     gap: 12px;
+    flex-shrink: 0;
 }
 
+/* SỬA: Căn chỉnh turn-indicator giống button */
 #turn-indicator {
-    padding: 10px 20px;
+    padding: 10px 18px !important; /* ĐỒNG BỘ với button */
 
-    border-radius: 6px;
+    border-radius: 8px !important; /* ĐỒNG BỘ với button */
 
     font-weight: bold;
 
     color: white;
 
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 
-    box-shadow:
-        inset 0 2px 4px rgba(255,255,255,0.2),
-        0 2px 4px rgba(0,0,0,0.3);
+    /* ĐỒNG BỘ hiệu ứng đổ bóng với button */
+    box-shadow: 0 5px 0 rgba(0,0,0,0.2), 0 8px 10px rgba(0,0,0,0.4);
+    
+    flex-shrink: 0;
+    white-space: nowrap;
+    
+    /* THÊM: Đồng bộ kích thước */
+    display: inline-block;
+    min-width: fit-content;
+    height: auto;
+    
+    /* Font size đồng bộ */
+    font-size: 14px;
+    
+    /* Border đồng bộ */
+    border: none;
 }
 
-.xanh-la {
-    background-color: #2ecc71;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+/* Màu xanh lá (lượt người chơi) */
+#turn-indicator.xanh-la {
+    background: linear-gradient(to bottom, #2ecc71, #27ae60);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
-.xanh-duong {
-    background-color: #3498db;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+/* Màu xanh dương (lượt bot) */
+#turn-indicator.xanh-duong {
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
 /* =========================================================
@@ -125,21 +142,40 @@ h1 {
 
     text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 
-    transition: all 0.1s ease;
+    /* Chỉ transition transform và box-shadow */
+    transition: transform 0.07s ease, box-shadow 0.07s ease;
+    
+    /* Ngăn button bị kéo giãn */
+    flex-shrink: 0;
+    flex-grow: 0;
+    
+    /* Đảm bảo kích thước ổn định */
+    min-width: fit-content;
+    width: auto;
+    
+    /* Tối ưu hiệu suất */
+    will-change: transform;
+    
+    /* Ngăn layout shift */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    /* Đồng bộ padding mặc định */
+    padding: 10px 18px;
 }
 
 .btn-3d:active {
     transform: translateY(4px) !important;
 }
 
+.btn-3d:hover {
+    transition: none;
+}
+
+/* Button Hướng Dẫn */
 #btn-guide {
-    padding: 10px 18px;
-
     background: linear-gradient(to bottom, #f39c12, #e67e22);
-
-    box-shadow:
-        0 5px 0 #b35d10,
-        0 8px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 0 #b35d10, 0 8px 10px rgba(0,0,0,0.4);
 }
 
 #btn-guide:hover {
@@ -147,19 +183,14 @@ h1 {
 }
 
 #btn-guide:active {
-    box-shadow:
-        0 1px 0 #b35d10,
-        0 2px 5px rgba(0,0,0,0.4);
+    transform: translateY(4px) !important;
+    box-shadow: 0 1px 0 #b35d10, 0 2px 5px rgba(0,0,0,0.4);
 }
 
+/* Button Chế Độ */
 #btn-mode {
-    padding: 10px 18px;
-
     background: linear-gradient(to bottom, #1abc9c, #16a085);
-
-    box-shadow:
-        0 5px 0 #117a65,
-        0 8px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 0 #117a65, 0 8px 10px rgba(0,0,0,0.4);
 }
 
 #btn-mode:hover {
@@ -167,9 +198,8 @@ h1 {
 }
 
 #btn-mode:active {
-    box-shadow:
-        0 1px 0 #117a65,
-        0 2px 5px rgba(0,0,0,0.4);
+    transform: translateY(4px) !important;
+    box-shadow: 0 1px 0 #117a65, 0 2px 5px rgba(0,0,0,0.4);
 }
 
 /* =========================================================
@@ -184,15 +214,8 @@ h1 {
 }
 
 .btn-audio {
-    padding: 10px 22px;
-
-    font-size: 14px;
-
     background: linear-gradient(to bottom, #34495e, #2c3e50);
-
-    box-shadow:
-        0 5px 0 #1a252f,
-        0 8px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 0 #1a252f, 0 8px 10px rgba(0,0,0,0.4);
 }
 
 .btn-audio:hover {
@@ -200,23 +223,18 @@ h1 {
 }
 
 .btn-audio:active {
-    box-shadow:
-        0 1px 0 #1a252f,
-        0 2px 5px rgba(0,0,0,0.4);
+    transform: translateY(4px) !important;
+    box-shadow: 0 1px 0 #1a252f, 0 2px 5px rgba(0,0,0,0.4);
 }
 
 .btn-audio.muted {
     background: linear-gradient(to bottom, #7f8c8d, #95a5a6);
-
-    box-shadow:
-        0 5px 0 #5f696a,
-        0 8px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 5px 0 #5f696a, 0 8px 10px rgba(0,0,0,0.4);
 }
 
 .btn-audio.muted:active {
-    box-shadow:
-        0 1px 0 #5f696a,
-        0 2px 5px rgba(0,0,0,0.4);
+    transform: translateY(4px) !important;
+    box-shadow: 0 1px 0 #5f696a, 0 2px 5px rgba(0,0,0,0.4);
 }
 
 /* =========================================================
@@ -496,11 +514,6 @@ h1 {
         margin-bottom: 2px;
     }
 
-    .btn-audio {
-        padding: 8px 20px;
-        font-size: 13px;
-    }
-
     .game-footer {
         font-size: 11px;
 
@@ -583,19 +596,16 @@ h1 {
         gap: 6px;
     }
 
+    /* Đồng bộ mobile */
     #turn-indicator {
         font-size: 12px !important;
-
         padding: 7px 10px !important;
-
         white-space: nowrap;
     }
 
     #btn-guide,
     #btn-mode {
-
         padding: 7px 10px !important;
-
         font-size: 12px !important;
     }
 
