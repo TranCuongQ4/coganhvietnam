@@ -1,6 +1,7 @@
 const HuongDanCoGanh = {
     title: "HƯỚNG DẪN CHƠI CỜ GÁNH",
     steps: [
+	    "<strong>Time:</strong> 4 phút thi đấu , mổi bên có 30 giây suy nghĩ (quá thời gian xử thua).",
         "<strong>Mục tiêu:</strong> Làm cho đối phương hết sạch quân trên bàn cờ hoặc bị vây hãm không còn đường di chuyển.",
         "<strong>Di chuyển quân:</strong> Đến lượt, bạn chọn một quân cờ của mình di chuyển tới 1 ô trống lân cận theo các đường vạch nối có sẵn trên bàn cờ.",
         "<strong>Luật GÁNH:</strong> Khi quân bạn đi vào giữa 2 quân đối phương (tạo thế kẹp 3 quân thẳng hàng), 2 quân đối phương sẽ bị 'gánh' và biến đổi thành màu quân của bạn.",
